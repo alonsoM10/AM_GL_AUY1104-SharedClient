@@ -14,7 +14,7 @@ on:
 
 jobs:
   usar-receta-compartida:
-    uses: alonsoM10/AUY1104-SharedCentral/.github/workflows/deploy-api.yaml@main
+    uses: alonsoM10/AM_GL_AUY1104-SharedCentral/.github/workflows/deploy-api.yaml@main
     with:
       image-name: demo-api
       image-tag: ${{ github.ref_name }}

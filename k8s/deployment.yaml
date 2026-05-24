@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
         - name: demo-api
-          image: alonsom10/demo-api:latest
+          # 1er CAMBIO AQUI: Cambiamos :latest por un tag específico
+          image: alonsom10/demo-api:v2.0.0 
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -26,4 +27,5 @@ spec:
               memory: "64Mi"
             limits:
               cpu: "200m"
-              memory: "128Mi"
+              # 2do CAMBIO AQUI: Subimos el límite de 128Mi a 256Mi
+              memory: "256Mi"

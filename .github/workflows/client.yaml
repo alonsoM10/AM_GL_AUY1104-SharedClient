@@ -1,0 +1,25 @@
+# ─────────────────────────────────────────────────────────────
+# Este archivo vive en el repo del cliente.
+# Se ejecuta cuando publicas un tag de versión (v1.0.0, etc.)
+# o manualmente desde Actions → Run workflow
+# Delega todo el trabajo al repo central (SharedCentral)
+# ─────────────────────────────────────────────────────────────
+name: Publicar API (delegar a SharedCentral)
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+  workflow_dispatch:
+
+jobs:
+  usar-receta-compartida:
+    uses: alonsoM10/AUY1104-SharedCentral/.github/workflows/deploy-api.yaml@main
+    with:
+      image-name: demo-api
+      image-tag: ${{ github.ref_name }}
+      k3s-server-public-ip: ${{ vars.K3S_SERVER_PUBLIC_IP }}
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      EA2_SSH_PRIVATE_KEY: ${{ secrets.EA2_SSH_PRIVATE_KEY }}

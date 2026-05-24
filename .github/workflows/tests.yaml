@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────
+# Pipeline de validación desacoplado
+# Se ejecuta con push en ramas de desarrollo
+# NO corre en main ni en tags
+# Solo ejecuta pruebas, no construye ni publica imágenes
+# ─────────────────────────────────────────────────────────────
+
+name: Pipeline de Tests
+
+on:
+  push:
+    branches-ignore:
+      - main
+    tags-ignore:
+      - '**'
+
+jobs:
+  run-tests:
+    name: Instalar dependencias y ejecutar tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1 · Descargar el código
+        uses: actions/checkout@v4
+
+      - name: 2 · Instalar dependencias
+        run: npm install
+
+      - name: 3 · Ejecutar tests
+        run: npm test

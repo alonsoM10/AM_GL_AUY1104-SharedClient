@@ -17,7 +17,7 @@ spec:
       containers:
         - name: demo-api
           # 1er CAMBIO AQUI: Cambiamos :latest por un tag específico
-          image: alonsom10/demo-api:latest
+          image: alonsom10/demo-api:tag-no-existe
           imagePullPolicy: Always
           ports:
             - containerPort: 3000

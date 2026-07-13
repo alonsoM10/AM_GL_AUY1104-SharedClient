@@ -10,6 +10,9 @@ app.get('/health', (req, res) => {
     ok: true,
     servicio: 'auy1104-api-ejemplo',
     mensaje: 'El servicio está en ejecución',
+    color: process.env.APP_COLOR || 'sin-color',
+    entorno: process.env.APP_ENV || 'sin-entorno',
+    version: process.env.APP_VERSION || 'sin-version',
   });
 });
 

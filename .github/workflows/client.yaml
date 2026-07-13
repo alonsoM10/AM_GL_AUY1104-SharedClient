@@ -14,11 +14,13 @@ on:
 
 jobs:
   usar-receta-compartida:
-    uses: alonsoM10/AM_GL_AUY1104-SharedCentral/.github/workflows/deploy-api.yaml@ea3-alonso
+    uses: alonsoM10/AM_GL_AUY1104-SharedCentral/.github/workflows/deploy-api.yaml@main
     with:
       image-name: demo-api
       image-tag: ${{ github.ref_name }}
       k3s-server-public-ip: ${{ vars.K3S_SERVER_PUBLIC_IP }}
+      namespace: default
+      app-env: prod
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

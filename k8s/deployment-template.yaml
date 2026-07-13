@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-api-${COLOR}
+  namespace: ${NAMESPACE}
+  labels:
+    app: demo-api
+    color: ${COLOR}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-api
+      color: ${COLOR}
+  template:
+    metadata:
+      labels:
+        app: demo-api
+        color: ${COLOR}
+    spec:
+      containers:
+        - name: demo-api
+          image: ${IMAGE}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: APP_COLOR
+              value: "${COLOR}"
+            - name: APP_ENV
+              value: "${APP_ENV}"
+            - name: APP_VERSION
+              value: "${IMAGE}"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"

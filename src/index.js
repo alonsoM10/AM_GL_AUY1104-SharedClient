@@ -10,7 +10,7 @@ app.get('/health', (req, res) => {
     ok: true,
     servicio: 'auy1104-api-ejemplo',
     mensaje: 'El servicio está en ejecución',
-    color: 'ROTO', // TEST: forzar fallo de validacion de salud para probar rollback
+    color: process.env.APP_COLOR || 'sin-color',
     entorno: process.env.APP_ENV || 'sin-entorno',
     version: process.env.APP_VERSION || 'sin-version',
   });
